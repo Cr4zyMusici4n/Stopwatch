@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.os.SystemClock
 import android.widget.Button
 import android.widget.Chronometer
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
@@ -31,8 +32,11 @@ class MainActivity : AppCompatActivity() {
             } else setBaseTime()
         }
 
+        val currentStateView = findViewById<TextView>(R.id.current_state)
+
         val startButton = findViewById<Button>(R.id.start_button)
         startButton.setOnClickListener {
+            currentStateView.text = "Начало отсчета"
             if (!running) {
                 setBaseTime()
                 stopwatch.start()
@@ -42,6 +46,7 @@ class MainActivity : AppCompatActivity() {
 
         val pauseButton = findViewById<Button>(R.id.pause_button)
         pauseButton.setOnClickListener {
+            currentStateView.text = "Пауза"
             if (running) {
                 saveOffset()
                 stopwatch.stop()
@@ -51,6 +56,7 @@ class MainActivity : AppCompatActivity() {
 
         val resetButton = findViewById<Button>(R.id.reset_button)
         resetButton.setOnClickListener {
+            currentStateView.text = ""
             offset = 0
             setBaseTime()
         }
